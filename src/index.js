@@ -4,9 +4,21 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/lib/integration/react';
+import { store, persistor } from './store';
+
+import Loading from './widget/Loading'
+
+// const store = createStore(rootReducer)
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <PersistGate loading={<Loading />} persistor={persistor}>
+        <App />
+      </PersistGate>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
